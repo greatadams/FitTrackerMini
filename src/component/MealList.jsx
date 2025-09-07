@@ -1,9 +1,16 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 
 const MealList=() => {
 
 
-    const [meals,setMeals]= useState([])//pluray array
+    const [meals,setMeals]= useState(()=>{
+        const meals =JSON.parse(localStorage.getItem('meals'))
+        return meals || [];
+    })//pluray array
+
+    useEffect(()=>{
+        localStorage.setItem('meals',JSON.stringify(meals))
+    },[meals])
 
     const [form,setForm]= useState({
         name:"",
