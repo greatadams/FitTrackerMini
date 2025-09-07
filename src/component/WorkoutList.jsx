@@ -1,9 +1,16 @@
-import { useState } from "react";
+import jquery from "jquery";
+import { useEffect, useState } from "react";
 const WorkoutList=() =>{
 
 
-const[workouts,setWorkouts]= useState([])
+const[workouts,setWorkouts]= useState(()=>{
+    const workouts= JSON.parse(localStorage.getItem('workouts'))
+    return workouts || []
+})
 
+useEffect(()=>{
+    localStorage.setItem('workouts',JSON.stringify(workouts))
+},[workouts])
 const[form,setForm]=useState({
 
     workoutType:'',
